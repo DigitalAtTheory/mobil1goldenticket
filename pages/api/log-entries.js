@@ -1,8 +1,14 @@
 import axios from "axios";
+import mailchimp from "@mailchimp/mailchimp_marketing";
 
 export default async function logEntries(req, res) {
   const { first_name, last_name, phone, email, zip_code, privacy_policy } =
     req.body;
+
+  mailchimp.setConfig({
+    apiKey: process.env.MAILCHIMP_API_KEY,
+    server: process.env.MAILCHIMP_SERVER_PREFIX,
+  });
 
   await axios
     .post(
@@ -26,6 +32,16 @@ export default async function logEntries(req, res) {
     )
     .then((data) => console.log(data.data.id))
     .catch((err) => console.error(err));
+
+  const response = await mailchimp.customerJourneys.trigger(
+    process.env.MAILCHIMP_JOURNEY_ID,
+    process.env.MAILCHIMP_STEP_ID,
+    {
+      email_address: email,
+    }
+  );
+
+  console.log(response);
 
   console.log(req.body);
 
