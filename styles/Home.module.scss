@@ -1,0 +1,26 @@
+.lockupContainer {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1),
+    90%,
+    rgba(0, 0, 0, 0.2)
+  );
+}
+
+.heroImage {
+  background: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
+    url("../public/SEMA-Counts-Kustom-Reflex-Background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: -10px;
+}
+
+.buttonContainer {
+  background: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
+    url("../public/SEMA-Counts-Kustom-Reflex-Background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: -10px;
+}
