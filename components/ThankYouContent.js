@@ -3,7 +3,7 @@ import React from "react";
 export default function ThankYouContent() {
   return (
     <div className="text-center px-4">
-      <h2 className="text-3xl">You're In!</h2>
+      <h2 className="text-3xl">{`You're In!`}</h2>
       <p className="font-light pt-2">
         {`You have entered for a chance to win a Golden Ticket for two to the
         Mobil 1™ x Count's Kustoms VIP event on Thursday, November 4. If your
