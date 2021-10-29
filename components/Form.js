@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/Home.module.scss";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Form() {
   const [firstName, setFirstName] = useState("");
@@ -9,6 +10,8 @@ export default function Form() {
   const [email, setEmail] = useState("");
   const [zip, setZip] = useState("");
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
+
+  const router = useRouter();
 
   const handleInput = (e) => {
     switch (e.target.id) {
@@ -36,7 +39,7 @@ export default function Form() {
     privacyPolicy ? setPrivacyPolicy(false) : setPrivacyPolicy(true);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     const formData = {
       first_name: firstName,
       last_name: lastName,
@@ -46,7 +49,8 @@ export default function Form() {
       privacy_policy: privacyPolicy,
     };
 
-    axios.post("/api/log-entries", formData);
+    await axios.post("/api/log-entries", formData);
+    router.push("/thank-you");
   };
 
   return (
