@@ -6,7 +6,13 @@ export default function ThankYouHero() {
   return (
     <div className={`${styles.heroContainer}`}>
       <div className="pt-10">
-        <Image src={bottle} placeholder="blur" priority loading="eager" />
+        <Image
+          src={bottle}
+          placeholder="blur"
+          priority
+          loading="eager"
+          alt="Mobil 1 Golden Ticket Bottle"
+        />
       </div>
     </div>
   );
