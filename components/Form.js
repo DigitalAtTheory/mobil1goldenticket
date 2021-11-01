@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "../styles/Home.module.scss";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Loader from "./Loader";
 
 export default function Form() {
   const [firstName, setFirstName] = useState("");
@@ -10,6 +11,8 @@ export default function Form() {
   const [email, setEmail] = useState("");
   const [zip, setZip] = useState("");
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [buttonText, setButtonText] = useState("Submit");
 
   const router = useRouter();
 
@@ -40,6 +43,7 @@ export default function Form() {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     const formData = {
       first_name: firstName,
       last_name: lastName,
@@ -49,7 +53,11 @@ export default function Form() {
       privacy_policy: privacyPolicy,
     };
 
-    await axios.post("/api/log-entries", formData);
+    await axios.post("/api/log-entries", formData).catch((err) => {
+      console.error(err.message);
+    });
+    setButtonText("Thank You!");
+    setLoading(false);
     router.push("/thank-you");
   };
 
@@ -164,7 +172,8 @@ export default function Form() {
             onClick={handleSubmit}
             className="bg-reflex-600 text-white w-3/4 lg:w-1/2 mx-auto mb-10 py-3 rounded shadow-xl"
           >
-            Submit
+            {loading && <Loader />}
+            {!loading && buttonText}
           </button>
           <p className="font-light text-xs px-8">
             *Event is Thursday, November 4.
